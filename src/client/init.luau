@@ -27,8 +27,6 @@ end
 
 data.Functions.Bind = function(stateName : string, id : string, callback : (any) -> ())
     -- run a function when a state is changed
-
-    print(stateName.." bound!")
     local newBind = {
         ["StateName"] = stateName,
         ["Callback"] = callback,
@@ -48,9 +46,6 @@ data.Functions.Unbind = function(id : string)
 end
 
 data.Functions.Modify = function(stateName : string, value : any)
-
-    print(dataScript.Binds)
-
     if stateName == nil then return end
     if value == nil then return end
     local state = dataScript.States[stateName]
@@ -60,8 +55,6 @@ data.Functions.Modify = function(stateName : string, value : any)
     for i, bind in ipairs(dataScript.Binds) do
         local checkName = bind.StateName
         local callback = bind.Callback
-
-        print(bind)
 
         if checkName == stateName and callback ~= nil then
             print("Running")
