@@ -28,5 +28,5 @@ For more help, check out [the Rojo documentation](https://rojo.space/docs).
 ## Special thanks
 - [Rojo](https://rojo.space/docs) - Build system  
 - [VSCodium](https://vscodium.com/) - Simple, easy to use and FOSS IDE
-- [VinegarHQ](https://vinegarhq.io) - Making ROL possible  
+- [VinegarHQ](https://vinegarhq.org) - Making ROL possible (Vinegar & Sober) 
 - [Roblox](https://www.roblox.com) - Obviously  
