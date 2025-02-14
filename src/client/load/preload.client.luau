@@ -30,8 +30,6 @@ end
 function preloadAssets()
     spawn(function()
         cps:PreloadAsync(assetList, function()
-            -- callback
-
             client.Functions.Log("Preload", "All "..#assetList.." assets loaded!")
         end)
     end)

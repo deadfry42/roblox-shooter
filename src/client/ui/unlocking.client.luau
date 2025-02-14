@@ -55,6 +55,10 @@ function initialiseUnlocker()
 
     Instance.new("UIAspectRatioConstraint", img)
 
+    client.Functions.Bind("mouseUnlockable", "mouseunlockingscript", function(value : boolean)
+        if value == false then hide() end
+    end)
+
     gui.Parent = plr.PlayerGui
 end
 
@@ -96,10 +100,13 @@ function handleInput(i : InputObject, gpe : boolean)
     if gpe == true then return end
 
     if i.KeyCode == keybind then
-        makeSound()
         if not img.Visible then
-            show()
+            if client.States.mouseUnlockable then
+                makeSound()
+                show()
+            end
         else
+            makeSound()
             hide()
         end
     end
