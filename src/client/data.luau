@@ -4,7 +4,8 @@
 
 local data = {
     ["States"] = {
-        ["mouseUnlockable"] = true
+        ["mouseUnlockable"] = true,
+        ["mainMenuOpen"] = false,
     },
     ["Binds"] = {}
 }

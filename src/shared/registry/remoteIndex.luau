@@ -25,9 +25,7 @@ local function initialise()
     end
 end
 
-local shared = require(script.Parent.Parent)
-
-local function createRemote(name : string) 
+local function remote(name : string) 
     local findRemote = remoteEvents:FindFirstChild(name)
     if findRemote == nil and not rus:IsClient() then
         -- only server can create remote
@@ -48,7 +46,7 @@ initialise()
 data = {
     ["Content"] = {
         ["UI"] = {
-            ["SendMenu"] = createRemote("sendmenu")
+            ["SendMenu"] = remote("sendmenu")
         }
     }
 }

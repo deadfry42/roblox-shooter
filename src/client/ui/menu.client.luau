@@ -10,24 +10,33 @@ local remoteIndex = client.Registry.remoteIndex
 
 local plr : Player = pls.LocalPlayer
 
-local guiExists = false
-
 local gui : ScreenGui
 local frame : Frame
 
+-- config
+local verbose : boolean = true
+
 function initialiseMenu()
 
-    client.Functions.Log("Menu", "UI request recieved!")
+    if verbose then client.Functions.Log("Menu", "UI request recieved!") end
+
+    if client.States.mainMenuOpen then return end
 
     gui = Instance.new("ScreenGui", plr.PlayerGui)
     frame = Instance.new("Frame", gui)
 
+    gui.Name = "MainMenu"
+
     gui.Enabled = false
 
-    -- process
+    -- create the gui
+
+    frame.Size = UDim2.new(0.3, 0, 1, 0)
+
 
     gui.Enabled = true
     
+    client.Functions.Modify("mainMenuOpen", true)
 end
 
 remoteIndex.Content.UI.SendMenu.OnClientEvent:Connect(initialiseMenu)
