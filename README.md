@@ -2,7 +2,7 @@
 A free-and-open-source Roblox shooter, developed primarily by me.
 
 > [!WARNING]  
-> Extremely WIP, and experimental
+> Extremely WIP, and experimental  
 > Do not expect to be playable for a while.
 
 ## Notes
