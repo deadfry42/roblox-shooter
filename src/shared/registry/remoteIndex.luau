@@ -8,9 +8,9 @@ local remoteEvents = Instance.new("Folder")
 remoteEvents.Name = "RemoteEvents"
 remoteEvents.Parent = rps
 
-local managed = Instance.new("StringValue")
-managed.Name = "README"
-managed.Value = "This folder is managed by remoteIndex under shared."
+local managed = Instance.new("StringValue", remoteEvents)
+managed.Name = "!!README"
+managed.Value = "This folder is managed by remoteIndex under the shared/registry folder."
 
 local shared = require(script.Parent.Parent)
 
