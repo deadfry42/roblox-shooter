@@ -1,6 +1,10 @@
 # roblox-shooter
 A free-and-open-source Roblox shooter, developed primarily by me.
 
+> [!WARNING]  
+> Extremely WIP, and experimental
+> Do not expect to be playable for a while.
+
 ## Notes
 this game was originally named 'siege-2'. You may see this codename throughout.
 
@@ -23,4 +27,6 @@ For more help, check out [the Rojo documentation](https://rojo.space/docs).
 
 ## Special thanks
 - [Rojo](https://rojo.space/docs) - Build system  
-- [VinegarHQ](https://vinegarhq.io) - Making ROL possible
+- [VSCodium](https://vscodium.com/) - Simple, easy to use and FOSS IDE
+- [VinegarHQ](https://vinegarhq.io) - Making ROL possible  
+- [Roblox](https://www.roblox.com) - Obviously  
