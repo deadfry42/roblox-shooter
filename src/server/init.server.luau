@@ -1,1 +1,3 @@
-print("Hello world, from server!")
+-- purpose : 
+-- last edited : 14th feb
+-- author : deadfry42

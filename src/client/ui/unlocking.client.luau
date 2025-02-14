@@ -4,6 +4,7 @@
 
 local gui : ScreenGui
 local img : ImageButton
+local locker : TextButton
 
 local pls : Players = game:GetService("Players")
 local uis : UserInputService = game:GetService("UserInputService")
@@ -28,6 +29,7 @@ local tweenOut : TweenInfo = TweenInfo.new(tweenTime, Enum.EasingStyle.Quad, Enu
 function initialiseUnlocker() 
     gui = Instance.new("ScreenGui")
     img = Instance.new("ImageButton", gui)
+    locker = Instance.new("TextButton", img)
 
     gui.ResetOnSpawn = false
     gui.IgnoreGuiInset = true
@@ -37,11 +39,19 @@ function initialiseUnlocker()
     img.BackgroundTransparency = 1
     img.ImageTransparency = 1
     img.Image = imgId
-    img.Modal = true
     img.Name = "Indicator"
     img.AnchorPoint = Vector2.new(1, 1)
     img.Size = UDim2.new(0.089, 0, 0.065, 0)
     img.Position = UDim2.new(1, -40, 1, -60) -- offsets cuz roblox doesnt allow modal buttons in certain zones
+
+    locker.Visible = false
+    locker.Name = "Locker"
+    locker.Modal = true
+    locker.Text = ""
+    locker.BackgroundTransparency = 1
+    locker.TextTransparency = 1
+    locker.Size = UDim2.new(0, 0, 0, 0)
+    locker.Position = UDim2.new(0, 0, 0, 0)
 
     Instance.new("UIAspectRatioConstraint", img)
 
@@ -55,6 +65,7 @@ function show()
 
     if img.ImageTransparency == 1 then
         img.Visible = true
+        locker.Visible = true
         twns:Create(img, tweenIn, {ImageTransparency = 0}):Play()
     end
 end
@@ -65,6 +76,7 @@ function hide()
     end
 
     if img.ImageTransparency == 0 then
+        locker.Visible = false
         twns:Create(img, tweenOut, {ImageTransparency = 1}):Play()
         spawn(function()
             wait(tweenTime)

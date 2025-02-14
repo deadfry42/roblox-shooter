@@ -16,5 +16,6 @@ return {
         ["imageIndex"] = require(registry:WaitForChild("imageIndex")),
         ["soundIndex"] = require(registry:WaitForChild("soundIndex")),
         ["remoteIndex"] = require(registry:WaitForChild("remoteIndex")),
+        ["animationIndex"] = require(registry:WaitForChild("animationIndex")),
     }
 }
