@@ -1,6 +1,10 @@
--- purpose : load assets in the registry
--- last edited : 14th feb
--- author : deadfry42
+--[[ preload.client.luau
+pre-load assets that are found in the "Preload" entry of the registry.
+
+> last edited: 14th feb 2025
+> author(s): deadfry42
+> the code below licensed under GPLv3.
+]]
 
 local cps : ContentProvider = game:GetService("ContentProvider")
 local rps : ContentProvider = game:GetService("ReplicatedStorage")

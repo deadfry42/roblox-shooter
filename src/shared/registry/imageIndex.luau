@@ -1,6 +1,10 @@
--- purpose : centralised hub for all images in game
--- last edited : 13th feb
--- author : deadfry42
+--[[ imageIndex.luau
+a registry of all images used in the game
+
+> last edited: 14th feb 2025
+> author(s): deadfry42
+> the code below licensed under GPLv3.
+]]
 
 data = {
     ["Content"] = {

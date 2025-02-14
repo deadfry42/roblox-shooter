@@ -1,6 +1,10 @@
--- purpose : handle players
--- last edited : 14th feb
--- author : deadfry42
+--[[ players.server.luau
+handle players & sending main menu
+
+> last edited: 14th feb 2025
+> author(s): deadfry42
+> the code below licensed under GPLv3.
+]]
 
 local pls : Players = game:GetService("Players")
 

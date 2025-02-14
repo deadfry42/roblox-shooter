@@ -1,6 +1,10 @@
--- purpose : handle client abstractions
--- last edited : 14th feb
--- author : deadfry42
+--[[ client/init.luau
+handle client abstractions
+
+> last edited: 14th feb 2025
+> author(s): deadfry42
+> the code below licensed under GPLv3.
+]]
 
 local rps : ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Shared = rps:WaitForChild("Shared")

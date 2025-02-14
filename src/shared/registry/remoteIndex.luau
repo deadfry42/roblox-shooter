@@ -1,6 +1,10 @@
--- purpose : centralised hub for all remote events in game
--- last edited : 14th feb
--- author : deadfry42
+--[[ remoteIndex.luau
+a registry of all remote events used in the game
+
+> last edited: 14th feb 2025
+> author(s): deadfry42
+> the code below licensed under GPLv3.
+]]
 
 local rps : ReplicatedStorage = game:GetService("ReplicatedStorage")
 local rus : RunService = game:GetService("RunService")

@@ -1,6 +1,10 @@
--- purpose : create a mouse unlocking feature with gui in the bottom right corner
--- last edited : 14th feb
--- author : deadfry42
+--[[ mouse.client.luau
+create a mouse unlocking feature with gui in the bottom right corner
+
+> last edited: 14th feb 2025
+> author(s): deadfry42
+> the code below licensed under GPLv3.
+]]
 
 local gui : ScreenGui
 local img : ImageButton
