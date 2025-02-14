@@ -61,7 +61,6 @@ data.Functions.Modify = function(stateName : string, value : any)
         local callback = bind.Callback
 
         if checkName == stateName and callback ~= nil then
-            print("Running")
             callback(state)
         end
     end
