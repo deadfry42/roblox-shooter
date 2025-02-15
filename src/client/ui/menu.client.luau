@@ -1,7 +1,7 @@
 --[[ menu.client.luau
 handle the receiving of the main menu
 
-> last edited: 14th feb 2025
+> last edited: 15th feb 2025
 > author(s): deadfry42
 > the code below licensed under GPLv3.
 ]]
@@ -92,7 +92,7 @@ function createMain()
     content.BackgroundTransparency = 1
     content.Size = UDim2.new(1, 0, 1, 0)
     
-    playbtn.Position = UDim2.new(0.044, 0, 0.43, 0) --{0.044, 0},{0.43, 0}
+    playbtn.Position = UDim2.new(0.043, 0, 0.43, 0) --{0.043, 0},{0.43, 0}
     playbtn.Size = UDim2.new(0.304, 0, 0.182, 0) -- {0.304, 0},{0.182, 0}
     playbtn.Text = "Play"
     

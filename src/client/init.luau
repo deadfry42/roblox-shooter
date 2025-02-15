@@ -1,7 +1,7 @@
 --[[ client/init.luau
 handle client abstractions
 
-> last edited: 14th feb 2025
+> last edited: 15th feb 2025
 > author(s): deadfry42
 > the code below licensed under GPLv3.
 ]]
@@ -30,12 +30,16 @@ data.Functions.Log = function(sub : string, msg : string)
     print("[Client] "..sub.." / "..msg)
 end
 
+data.Functions.Warn = function(sub : string, msg : string) 
+    warn("[Client] "..sub.." / "..msg)
+end
+
 data.Functions.Bind = function(stateName : string, id : string, callback : (any) -> ())
     -- run a function when a state is changed
     local newBind = {
         ["StateName"] = stateName,
+        ["Id"] = id,
         ["Callback"] = callback,
-        ["Id"] = id
     }
     table.insert(dataScript.Binds, newBind)
 end
@@ -54,7 +58,9 @@ data.Functions.Modify = function(stateName : string, value : any)
     if stateName == nil then return end
     if value == nil then return end
     local state = dataScript.States[stateName]
-    if state == nil then return end
+    if state == nil then
+        data.Functions.Warn("Client", "Tried to modify invalid state "..stateName.."!")
+    end
     dataScript.States[stateName] = value
     state = dataScript.States[stateName]
     for i, bind in ipairs(dataScript.Binds) do
