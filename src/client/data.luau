@@ -13,6 +13,7 @@ local data = {
         ["mainMenuOpen"] = false,
         ["cameraToPart"] = false,
         ["lobbyCamera"] = false,
+        ["canReset"] = true,
     },
     ["Binds"] = {}
 }
