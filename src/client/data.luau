@@ -12,6 +12,7 @@ local data = {
         ["mouseUnlockable"] = true,
         ["mainMenuOpen"] = false,
         ["cameraToPart"] = false,
+        ["lobbyCamera"] = false,
     },
     ["Binds"] = {}
 }

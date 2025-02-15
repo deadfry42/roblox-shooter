@@ -170,7 +170,7 @@ function initialiseMenu()
     
     client.Functions.Modify("mainMenuOpen", true)
     client.Functions.Modify("mouseUnlockable", false)
-    client.Functions.Modify("cameraToPart", game.Workspace:WaitForChild("MMCamera"))
+    client.Functions.Modify("cameraToPart", client.States.lobbyCamera)
 end
 
 remoteIndex.Content.UI.PlayPressed.OnClientEvent:Connect(function()
