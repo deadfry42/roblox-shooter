@@ -56,7 +56,7 @@ end
 
 data.Functions.Modify = function(stateName : string, value : any)
     if stateName == nil then return end
-    if value == nil then return end
+    if value == nil then value = "" end
     local state = dataScript.States[stateName]
     if state == nil then
         data.Functions.Warn("Client", "Tried to modify invalid state "..stateName.."!")

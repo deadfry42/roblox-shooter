@@ -1,7 +1,7 @@
 --[[ players.server.luau
 handle players & sending main menu
 
-> last edited: 14th feb 2025
+> last edited: 15th feb 2025
 > author(s): deadfry42
 > the code below licensed under GPLv3.
 ]]
@@ -24,4 +24,9 @@ pls.PlayerAdded:Connect(function(plr : Player)
 
         server.Functions.Log("Players", "UI request sent!")
     end
+end)
+
+remoteIndex.Content.UI.PlayPressed.OnServerEvent:Connect(function(plr : Player)
+    plr:LoadCharacter()
+    remoteIndex.Content.UI.PlayPressed:FireClient(plr)
 end)

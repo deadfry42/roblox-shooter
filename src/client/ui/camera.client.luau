@@ -6,11 +6,7 @@ handle the camera
 > the code below licensed under GPLv3.
 ]]
 
-local pls : Players = game:GetService("Players")
-
-local plr = pls.LocalPlayer
-
-local cam = game.Workspace.CurrentCamera
+local cam : Camera = game.Workspace.CurrentCamera
 
 local client = require(script.Parent.Parent)
 
@@ -20,7 +16,9 @@ local function setCamToPart(part : BasePart)
 end
 
 client.Functions.Bind("cameraToPart", "handleMovement", function(part : any)
-    setCamToPart(part)
+    if typeof(part) == "Instance" then
+        if part:IsA("BasePart") then
+            setCamToPart(part)
+        end
+    end
 end)
-
-client.Functions.Modify("cameraToPart", game.Workspace:WaitForChild("MMCamera"))

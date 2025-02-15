@@ -86,6 +86,10 @@ function initialiseMain()
     
     creditsbtn = Instance.new("TextButton", content)
     creditsbtn.Name = "CreditsButton"
+
+    playbtn.MouseButton1Click:Connect(function()
+        remoteIndex.Content.UI.PlayPressed:FireServer()
+    end)
 end
 
 function createMain()
@@ -166,6 +170,16 @@ function initialiseMenu()
     
     client.Functions.Modify("mainMenuOpen", true)
     client.Functions.Modify("mouseUnlockable", false)
+    client.Functions.Modify("cameraToPart", game.Workspace:WaitForChild("MMCamera"))
 end
+
+remoteIndex.Content.UI.PlayPressed.OnClientEvent:Connect(function()
+    client.Functions.Modify("mainMenuOpen", false)
+    client.Functions.Modify("mouseUnlockable", true)
+    client.Functions.Modify("cameraToPart", nil)
+    main_gui:Destroy()
+    topbar_gui:Destroy()
+    underlay_gui:Destroy()
+end)
 
 remoteIndex.Content.UI.SendMenu.OnClientEvent:Connect(initialiseMenu)

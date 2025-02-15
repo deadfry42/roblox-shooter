@@ -1,7 +1,7 @@
 --[[ remoteIndex.luau
 a registry of all remote events used in the game
 
-> last edited: 14th feb 2025
+> last edited: 15th feb 2025
 > author(s): deadfry42
 > the code below licensed under GPLv3.
 ]]
@@ -50,7 +50,8 @@ initialise()
 data = {
     ["Content"] = {
         ["UI"] = {
-            ["SendMenu"] = remote("sendmenu")
+            ["SendMenu"] = remote("sendmenu"),
+            ["PlayPressed"] = remote("play"),
         }
     }
 }
