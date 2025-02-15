@@ -20,6 +20,7 @@ local data = {
         ["soundIndex"] = require(registry:WaitForChild("soundIndex")),
         ["remoteIndex"] = require(registry:WaitForChild("remoteIndex")),
         ["animationIndex"] = require(registry:WaitForChild("animationIndex")),
+        ["constIndex"] = require(registry:WaitForChild("constIndex")),
     },
     ["States"] = dataScript.States,
     ["Binds"] = dataScript.Binds,
