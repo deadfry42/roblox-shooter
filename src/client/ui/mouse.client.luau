@@ -10,6 +10,8 @@ local gui : ScreenGui
 local img : ImageButton
 local locker : TextButton
 
+local crosshair : Frame
+
 local pls : Players = game:GetService("Players")
 local uis : UserInputService = game:GetService("UserInputService")
 local twns : TweenService = game:GetService("TweenService")
@@ -121,7 +123,40 @@ function handleButton()
     hide()
 end
 
-initialiseUnlocker()
+-- crosshair
 
+function initialiseCrosshair()
+    crosshair = Instance.new("Frame", gui)
+    crosshair.Name = "Crosshair"
+    crosshair.AnchorPoint = Vector2.new(0.5, 0.5)
+    crosshair.Position = UDim2.new(0.5, 0, 0.5, 0)
+    crosshair.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    crosshair.Visible = false
+
+    local constraint = Instance.new("UISizeConstraint", crosshair)
+    constraint.MinSize = Vector2.new(3, 3)
+    constraint.MaxSize = Vector2.new(3, 3)
+end
+
+function onMoveCursor(i : InputObject, gpe : boolean)
+    if gpe == true then return end
+
+    if i.UserInputType == Enum.UserInputType.MouseMovement then
+        -- mouse moved
+        if uis.MouseBehavior == Enum.MouseBehavior.LockCenter and not locker.Visible then
+            -- locked
+            uis.MouseIconEnabled = false
+            crosshair.Visible = true
+        else
+            uis.MouseIconEnabled = true
+            crosshair.Visible = false
+        end
+    end
+end
+
+initialiseUnlocker()
+initialiseCrosshair()
+
+uis.InputChanged:Connect(onMoveCursor)
 uis.InputBegan:Connect(handleInput)
 img.MouseButton1Click:Connect(handleButton)
