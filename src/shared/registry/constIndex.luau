@@ -9,6 +9,7 @@ a registry of random bits of constant information, that needs to be centralised 
 data = {
     ["Content"] = {
         ["GameTitle"] = "Roblox Shooter",
+        ["GameVer"] = "v0.0.1-Alpha",
         ["Authors"] = {
             "EpicSharkMan33 (@deadfry42)"
         }

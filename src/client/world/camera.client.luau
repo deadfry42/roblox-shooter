@@ -10,9 +10,13 @@ local cam : Camera = game.Workspace.CurrentCamera
 
 local client = require(script.Parent.Parent)
 
-local function setCamToPart(part : BasePart)
+function setCamToPart(part : BasePart)
     cam.CameraType = Enum.CameraType.Scriptable
     cam.CFrame = part.CFrame
+end
+
+function setCameraDefaults()
+    cam.FieldOfView = 85
 end
 
 client.Functions.Bind("cameraToPart", "handleMovement", function(part : any)
@@ -22,3 +26,5 @@ client.Functions.Bind("cameraToPart", "handleMovement", function(part : any)
         end
     end
 end)
+
+setCameraDefaults()
