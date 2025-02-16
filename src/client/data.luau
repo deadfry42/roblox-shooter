@@ -14,6 +14,8 @@ local data = {
         ["cameraToPart"] = false,
         ["lobbyCamera"] = false,
         ["canReset"] = true,
+        ["currentEmote"] = false,
+        ["canChooseEmote"] = false,
     },
     ["Binds"] = {}
 }

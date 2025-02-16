@@ -141,7 +141,7 @@ function initialiseCrosshair()
 end
 
 function onMoveCursor(i : InputObject, gpe : boolean)
-    if gpe == true then return end
+    if gpe then return end
 
     if i.UserInputType == Enum.UserInputType.MouseMovement then
         -- mouse moved
