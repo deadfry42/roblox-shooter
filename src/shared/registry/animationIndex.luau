@@ -11,8 +11,8 @@ data = {
         ["Emotes"] = {
             ["Test"] = {
                 ["Name"] = "Test",
-                ["Looped"] = true,
-                ["Asset"] = "",
+                ["Looped"] = false,
+                ["Asset"] = "rbxassetid://73327415925121",
             }
         }
     }

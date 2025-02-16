@@ -15,7 +15,7 @@ local data = {
         ["lobbyCamera"] = false,
         ["canReset"] = true,
         ["currentEmote"] = false,
-        ["canChooseEmote"] = false,
+        ["canChooseEmote"] = true,
     },
     ["Binds"] = {}
 }
