@@ -1,13 +1,14 @@
 --[[ menu.client.luau
 handle the receiving of the main menu
 
-> last edited: 15th feb 2025
+> last edited: 16th feb 2025
 > author(s): deadfry42
 > the code below licensed under GPLv3.
 ]]
 
 local pls : Players = game:GetService("Players")
 local sgu : StarterGui = game:GetService("StarterGui")
+local twn : TweenService = game:GetService("TweenService")
 
 local client = require(script.Parent.Parent)
 
@@ -22,17 +23,182 @@ local topbar_title : TextLabel
 local modal_btn : TextButton
 
 local main_gui : ScreenGui
-local content : Frame
+local content : CanvasGroup
 local playbtn : TextButton
 local settingsbtn : TextButton
 local creditsbtn : TextButton
+
+local credits_content : CanvasGroup
+local credits_base : TextLabel
+local credits_back : TextButton
+
 
 local underlay_gui : ScreenGui
 local stripe_1 : Frame
 local stripe_2 : Frame
 
+local transitioning = false
+
 -- config
 local verbose : boolean = true
+local tweenInfoOut : TweenInfo = TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+-- local tweenInfoIn : TweenInfo = TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.In)
+
+local subGuis = {
+    ["Credits"] = {},
+    ["Main"] = {},
+    ["DramaticBlank"] = {}
+}
+
+subGuis.Credits = {
+    ["Initialise"] = function()
+        credits_content = Instance.new("CanvasGroup", main_gui)
+        credits_content.Name = "Credits_Content"
+        credits_base = Instance.new("TextLabel", credits_content)
+        credits_base.Name = "Text"
+        credits_back = Instance.new("TextButton", credits_content)
+        credits_content.Visible = false
+        subGuis.Credits.Initialised = true
+        subGuis.Credits.CanvasGroup = credits_content
+    end,
+    ["Create"] = function()
+        credits_content.Size = UDim2.new(1, 0, 1, 0)
+        credits_content.BackgroundTransparency = 1
+
+        credits_base.Size = UDim2.new(0.309, 0, 0.668, 0) -- {0.309, 0},{0.668, 0}
+        credits_base.Position = UDim2.new(0.014, 0, 0.141, 0) -- {0.014, 0},{0.141, 0}
+        credits_base.BackgroundTransparency = 1
+        credits_base.TextScaled = false
+        credits_base.TextYAlignment = Enum.TextYAlignment.Top
+        credits_base.TextXAlignment = Enum.TextXAlignment.Left
+        credits_base.TextColor3 = Color3.fromRGB(216, 214, 214)
+        credits_base.TextWrapped = true
+        credits_base.TextSize = 20
+        credits_base.Text = "test"
+        credits_base.Name = "base"
+
+        credits_back.Size = UDim2.new(0.101, 0, 0.061, 0) -- {0.101, 0},{0.061, 0}
+        credits_back.Position = UDim2.new(0.015, 0, 0.905, 0) -- {0.015, 0},{0.905, 0}
+        credits_back.Text = "Back"
+        credits_back.Name = "BackButton"
+
+        credits_back.MouseButton1Click:Connect(function()
+            animateGUIs(subGuis.Main, subGuis.Credits)
+        end)
+    end,
+    ["Destroy"] = function()
+        credits_content:Destroy()
+        credits_base:Destroy()
+        credits_back:Destroy()
+        subGuis.Credits.Initialised = false
+        subGuis.Credits.CanvasGroup = nil
+    end,
+    ["Initialised"] = false,
+    ["CanvasGroup"] = nil
+}
+
+subGuis.Main = {
+    ["Initialise"] = function()
+        content = Instance.new("CanvasGroup", main_gui)
+        content.Name = "Content"
+
+        playbtn = Instance.new("TextButton", content)
+        playbtn.Name = "PlayButton"
+
+        settingsbtn = Instance.new("TextButton", content)
+        settingsbtn.Name = "SettingsButton"
+        
+        creditsbtn = Instance.new("TextButton", content)
+        creditsbtn.Name = "CreditsButton"
+
+        playbtn.MouseButton1Click:Connect(function()
+            if transitioning then return end
+            animateGUIs(subGuis.DramaticBlank, subGuis.Main)
+            remoteIndex.Content.UI.PlayPressed:FireServer()
+        end)
+
+        creditsbtn.MouseButton1Click:Connect(function() 
+            animateGUIs(subGuis.Credits, subGuis.Main)
+        end)
+        subGuis.Main.Initialised = true
+        subGuis.Main.CanvasGroup = content
+    end,
+    ["Create"] = function()
+        content.BackgroundTransparency = 1
+        content.Size = UDim2.new(1, 0, 1, 0)
+        
+        playbtn.Position = UDim2.new(0.043, 0, 0.43, 0) --{0.043, 0},{0.43, 0}
+        playbtn.Size = UDim2.new(0.304, 0, 0.182, 0) -- {0.304, 0},{0.182, 0}
+        playbtn.Text = "Play"
+        
+        settingsbtn.Position = UDim2.new(0.043, 0, 0.622, 0) -- {0.043, 0},{0.622, 0}
+        settingsbtn.Size = UDim2.new(0.304, 0, 0.061, 0) -- {0.304, 0},{0.061, 0}
+        settingsbtn.Text = "Settings"
+
+        creditsbtn.Position = UDim2.new(0.043, 0, 0.694, 0) -- {{0.043, 0},{0.694, 0}
+        creditsbtn.Size = UDim2.new(0.304, 0, 0.061, 0) -- {0.304, 0},{0.061, 0}
+        creditsbtn.Text = "Credits"
+    end,
+    ["Destroy"] = function()
+        content:Destroy()
+        playbtn:Destroy()
+        settingsbtn:Destroy()
+        creditsbtn:Destroy()
+        subGuis.Main.Initialised = false
+        subGuis.Main.CanvasGroup = nil
+    end,
+    ["Initialised"] = false,
+    ["CanvasGroup"] = nil
+}
+
+subGuis.DramaticBlank = {
+    ["Initialise"] = function()
+        local blank = Instance.new("CanvasGroup")
+        subGuis.DramaticBlank.Initialised = true
+        subGuis.DramaticBlank.CanvasGroup = blank
+    end,
+    ["Create"] = function()
+        -- nothing needs to be done
+    end,
+    ["Destroy"] = function()
+        credits_content:Destroy()
+        credits_base:Destroy()
+        credits_back:Destroy()
+        subGuis.DramaticBlank.Initialised = false
+        subGuis.DramaticBlank.CanvasGroup = nil
+    end,
+    ["Initialised"] = false,
+    ["CanvasGroup"] = nil
+}
+
+function animateGUIs(guiIn : any, guiOut : any)
+    if not guiOut.Initialised then return end
+    if transitioning then return end
+    transitioning = true
+
+    if not guiIn.Initialised then
+        guiIn.Initialise()
+        guiIn.Create()
+    end
+
+    guiOut.CanvasGroup.Position = UDim2.new(0, 0, 0, 0)
+    guiOut.CanvasGroup.GroupTransparency = 0
+    local outTween = twn:Create(guiOut.CanvasGroup, tweenInfoOut, {Position = UDim2.new(-0.3, 0, 0, 0), GroupTransparency = 1})
+
+    guiIn.CanvasGroup.Position = UDim2.new(-0.3, 0, 0, 0)
+    guiIn.CanvasGroup.GroupTransparency = 1
+    guiIn.CanvasGroup.Visible = true
+    local inTween = twn:Create(guiIn.CanvasGroup, tweenInfoOut, {Position = UDim2.new(0, 0, 0, 0), GroupTransparency = 0})
+
+    outTween:Play()
+    inTween:Play()
+    inTween.Completed:Connect(function()
+        transitioning = false
+    end)
+    outTween.Completed:Connect(function()
+        guiOut.Destroy()
+    end)
+end
 
 function initialiseTopBar()
     topbar_gui = Instance.new("ScreenGui", plr.PlayerGui)
@@ -69,44 +235,13 @@ function createTopbar()
     topbar_title.TextYAlignment = Enum.TextYAlignment.Bottom
 end
 
-function initialiseMain()
+function initialiseMainGui()
     main_gui = Instance.new("ScreenGui", plr.PlayerGui)
     main_gui.Enabled = false
     main_gui.Name = "MainMenu_Main"
     main_gui.IgnoreGuiInset = false
-
-    content = Instance.new("Frame", main_gui)
-    content.Name = "Content"
-
-    playbtn = Instance.new("TextButton", content)
-    playbtn.Name = "PlayButton"
-
-    settingsbtn = Instance.new("TextButton", content)
-    settingsbtn.Name = "SettingsButton"
-    
-    creditsbtn = Instance.new("TextButton", content)
-    creditsbtn.Name = "CreditsButton"
-
-    playbtn.MouseButton1Click:Connect(function()
-        remoteIndex.Content.UI.PlayPressed:FireServer()
-    end)
-end
-
-function createMain()
-    content.BackgroundTransparency = 1
-    content.Size = UDim2.new(1, 0, 1, 0)
-    
-    playbtn.Position = UDim2.new(0.043, 0, 0.43, 0) --{0.043, 0},{0.43, 0}
-    playbtn.Size = UDim2.new(0.304, 0, 0.182, 0) -- {0.304, 0},{0.182, 0}
-    playbtn.Text = "Play"
-    
-    settingsbtn.Position = UDim2.new(0.043, 0, 0.622, 0) -- {0.043, 0},{0.622, 0}
-    settingsbtn.Size = UDim2.new(0.304, 0, 0.061, 0) -- {0.304, 0},{0.061, 0}
-    settingsbtn.Text = "Settings"
-
-    creditsbtn.Position = UDim2.new(0.043, 0, 0.694, 0) -- {{0.043, 0},{0.694, 0}
-    creditsbtn.Size = UDim2.new(0.304, 0, 0.061, 0) -- {0.304, 0},{0.061, 0}
-    creditsbtn.Text = "Credits"
+    main_gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    main_gui.DisplayOrder = 100
 end
 
 function initialiseUnderlay()
@@ -144,7 +279,7 @@ function initialiseMenu()
     if client.States.mainMenuOpen then return end
 
     initialiseTopBar()
-    initialiseMain()
+    initialiseMainGui()
     initialiseUnderlay()
     -- create the gui
 
@@ -152,7 +287,6 @@ function initialiseMenu()
     modal_btn.Name = "test"
 
     createTopbar()
-    createMain()
     createUnderlay()
 
     modal_btn.Modal = true
@@ -171,6 +305,13 @@ function initialiseMenu()
     client.Functions.Modify("mainMenuOpen", true)
     client.Functions.Modify("mouseUnlockable", false)
     client.Functions.Modify("cameraToPart", client.States.lobbyCamera)
+
+    -- luau lang server won't shut the fuck up
+    if subGuis.DramaticBlank ~= nil then
+        if subGuis.DramaticBlank.Initialise ~= nil then subGuis.DramaticBlank.Initialise() end
+        if subGuis.DramaticBlank.Create ~= nil then subGuis.DramaticBlank.Create() end
+        animateGUIs(subGuis.Main, subGuis.DramaticBlank)
+    end
 end
 
 remoteIndex.Content.UI.PlayPressed.OnClientEvent:Connect(function()
