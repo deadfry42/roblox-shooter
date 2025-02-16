@@ -1,7 +1,7 @@
 --[[ lobby.client.luau
 create the lobby background on the client
 
-> last edited: 15th feb 2025
+> last edited: 16th feb 2025
 > author(s): deadfry42
 > the code below licensed under GPLv3.
 ]]
@@ -29,17 +29,17 @@ function createLobby()
     cameraPart.Size = Vector3.new(1,1,1)
     cameraPart.Rotation = Vector3.new(0, 90, 0)
 
-    client.Functions.Modify("lobbyCamera", cameraPart)
+    client:Modify("lobbyCamera", cameraPart)
 end
 
 function destroyLobby()
     lobbyCreated = false
 
     LobbyModel:Destroy()
-    client.Functions.Modify("lobbyCamera", nil)
+    client:Modify("lobbyCamera", nil)
 end
 
-client.Functions.Bind("mainMenuOpen", "lobby", function(val)
+client:Bind("mainMenuOpen", "lobby", function(val)
     if val == true and lobbyCreated == false then
         createLobby()
     elseif val == false and lobbyCreated == true then

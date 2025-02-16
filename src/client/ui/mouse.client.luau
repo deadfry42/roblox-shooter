@@ -61,7 +61,7 @@ function initialiseUnlocker()
 
     Instance.new("UIAspectRatioConstraint", img)
 
-    client.Functions.Bind("mouseUnlockable", "mouseunlockingscript", function(value : boolean)
+    client:Bind("mouseUnlockable", "mouseunlockingscript", function(value : boolean)
         if value == false then hide() end
     end)
 
@@ -70,7 +70,7 @@ end
 
 function show()
     if verbose then
-        client.Functions.Log("Unlocking", "Showing modal unlock")
+        client:Log("Unlocking", "Showing modal unlock")
     end
 
     if img.ImageTransparency == 1 then
@@ -82,7 +82,7 @@ end
 
 function hide()
     if verbose then
-        client.Functions.Log("Unlocking", "Hiding modal unlock")
+        client:Log("Unlocking", "Hiding modal unlock")
     end
 
     if img.ImageTransparency == 0 then

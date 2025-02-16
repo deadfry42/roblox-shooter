@@ -1,7 +1,7 @@
 --[[ preload.client.luau
 Handle the reset button
 
-> last edited: 15th feb 2025
+> last edited: 16th feb 2025
 > author(s): deadfry42
 > the code below licensed under GPLv3.
 ]]
@@ -27,9 +27,9 @@ local coreCall do
 	end
 end
 
-client.Functions.Bind("canReset", "disablingReset", function(val)
+client:Bind("canReset", "disablingReset", function(val)
     if val == nil then return end
     assert(coreCall('SetCore', 'ResetButtonCallback', val))
 end)
 
-client.Functions.Modify("canReset", false)
+client:Modify("canReset", false)

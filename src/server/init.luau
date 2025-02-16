@@ -1,7 +1,7 @@
 --[[ server/init.luau
 handle server abstractions
 
-> last edited: 14th feb 2025
+> last edited: 16th feb 2025
 > author(s): deadfry42
 > the code below licensed under GPLv3.
 ]]
@@ -11,7 +11,6 @@ local Shared = rps:WaitForChild("Shared")
 local registry = Shared:WaitForChild("registry")
 
 local data = {
-    ["Functions"] = {},
     ["Registry"] = {
         -- add manually for the language server to pick it up
         ["imageIndex"] = require(registry:WaitForChild("imageIndex")),
@@ -22,8 +21,12 @@ local data = {
     },
 }
 
-data.Functions.Log = function(sub : string, msg : string) 
+function data:Log(sub : string, msg : string) 
     print("[Server] "..sub.." / "..msg)
+end
+
+function data:Warn(sub : string, msg : string)
+    warn("[Server] "..sub.." / "..msg)
 end
 
 return data

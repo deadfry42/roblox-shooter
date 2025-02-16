@@ -22,7 +22,7 @@ pls.PlayerAdded:Connect(function(plr : Player)
         local event : RemoteEvent = remoteIndex.Content.UI.SendMenu
         event:FireClient(plr)
 
-        server.Functions.Log("Players", "UI request sent!")
+        server:Log("Players", "UI request sent!")
     end
 end)
 

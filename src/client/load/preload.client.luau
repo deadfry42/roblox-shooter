@@ -1,7 +1,7 @@
 --[[ preload.client.luau
 pre-load assets that are found in the "Preload" entry of the registry.
 
-> last edited: 14th feb 2025
+> last edited: 16th feb 2025
 > author(s): deadfry42
 > the code below licensed under GPLv3.
 ]]
@@ -34,7 +34,7 @@ end
 function preloadAssets()
     spawn(function()
         cps:PreloadAsync(assetList, function()
-            client.Functions.Log("Preload", "All "..#assetList.." assets loaded!")
+            client:Log("Preload", "All "..#assetList.." assets loaded!")
         end)
     end)
 end

@@ -8,6 +8,6 @@ Handle character emotes
 
 local client = require(script.Parent.Parent)
 
-client.Functions.Bind("currentEmote", "playEmote", function(val)
+client:Bind("currentEmote", "playEmote", function(val)
     
 end)

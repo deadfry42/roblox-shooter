@@ -19,7 +19,7 @@ function setCameraDefaults()
     cam.FieldOfView = 85
 end
 
-client.Functions.Bind("cameraToPart", "handleMovement", function(part : any)
+client:Bind("cameraToPart", "handleMovement", function(part : any)
     if typeof(part) == "Instance" then
         if part:IsA("BasePart") then
             setCamToPart(part)

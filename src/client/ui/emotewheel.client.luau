@@ -17,7 +17,7 @@ local KBMKey = Enum.KeyCode.B
 local CKey = Enum.KeyCode.DPadDown
 
 function playEmote(emoteId : string)
-    client.Functions.Modify("currentEmote", emoteId)
+    client:Modify("currentEmote", emoteId)
 end
 
 function playSelectedEmote()
@@ -46,7 +46,7 @@ uis.InputEnded:Connect(function(i : InputObject, gpe : boolean)
     end
 end)
 
-client.Functions.Bind("canChooseEmote", "immediateFeedback", function(val)
+client:Bind("canChooseEmote", "immediateFeedback", function(val)
     if val ~= nil then
         if typeof(val) == "boolean" then
             if val == false and choosing then

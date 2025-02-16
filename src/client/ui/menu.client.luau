@@ -338,7 +338,7 @@ end
 
 function initialiseMenu()
 
-    if verbose then client.Functions.Log("Menu", "UI request recieved!") end
+    if verbose then client:Log("Menu", "UI request recieved!") end
 
     if client.States.mainMenuOpen then return end
 
@@ -366,9 +366,9 @@ function initialiseMenu()
 
     sgu:SetCoreGuiEnabled(Enum.CoreGuiType.All, false)
     
-    client.Functions.Modify("mainMenuOpen", true)
-    client.Functions.Modify("mouseUnlockable", false)
-    client.Functions.Modify("cameraToPart", client.States.lobbyCamera)
+    client:Modify("mainMenuOpen", true)
+    client:Modify("mouseUnlockable", false)
+    client:Modify("cameraToPart", client.States.lobbyCamera)
 
     -- luau lang server won't shut the fuck up
     if subGuis.DramaticBlank ~= nil then
@@ -379,9 +379,9 @@ function initialiseMenu()
 end
 
 remoteIndex.Content.UI.PlayPressed.OnClientEvent:Connect(function()
-    client.Functions.Modify("mainMenuOpen", false)
-    client.Functions.Modify("mouseUnlockable", true)
-    client.Functions.Modify("cameraToPart", nil)
+    client:Modify("mainMenuOpen", false)
+    client:Modify("mouseUnlockable", true)
+    client:Modify("cameraToPart", nil)
     main_gui:Destroy()
     topbar_gui:Destroy()
     underlay_gui:Destroy()
