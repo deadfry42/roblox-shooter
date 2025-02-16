@@ -1,7 +1,7 @@
 --[[ mouse.client.luau
 create a mouse unlocking feature with gui in the bottom right corner
 
-> last edited: 14th feb 2025
+> last edited: 16th feb 2025
 > author(s): deadfry42
 > the code below licensed under GPLv3.
 ]]
@@ -10,7 +10,7 @@ local gui : ScreenGui
 local img : ImageButton
 local locker : TextButton
 
-local crosshair : Frame
+local crosshair : ImageLabel
 
 local pls : Players = game:GetService("Players")
 local uis : UserInputService = game:GetService("UserInputService")
@@ -126,16 +126,18 @@ end
 -- crosshair
 
 function initialiseCrosshair()
-    crosshair = Instance.new("Frame", gui)
+    crosshair = Instance.new("ImageLabel", gui)
     crosshair.Name = "Crosshair"
     crosshair.AnchorPoint = Vector2.new(0.5, 0.5)
     crosshair.Position = UDim2.new(0.5, 0, 0.5, 0)
     crosshair.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    crosshair.Size = UDim2.new(0, 7, 0, 7)
+    crosshair.ScaleType = Enum.ScaleType.Fit
+    crosshair.Image = "rbxassetid://87061516705555"
+    crosshair.BackgroundTransparency = 1
     crosshair.Visible = false
 
-    local constraint = Instance.new("UISizeConstraint", crosshair)
-    constraint.MinSize = Vector2.new(3, 3)
-    constraint.MaxSize = Vector2.new(3, 3)
+    Instance.new("UIAspectRatioConstraint", crosshair)
 end
 
 function onMoveCursor(i : InputObject, gpe : boolean)
