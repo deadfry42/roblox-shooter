@@ -1,7 +1,7 @@
 --[[ players.server.luau
 handle players & sending main menu
 
-> last edited: 15th feb 2025
+> last edited: 16th feb 2025
 > author(s): deadfry42
 > the code below licensed under GPLv3.
 ]]
