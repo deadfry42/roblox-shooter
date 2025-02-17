@@ -1,7 +1,7 @@
 --[[ emotewheel.client.luau
 Handle selecting an emote
 
-> last edited: 16th feb 2025
+> last edited: 17th feb 2025
 > author(s): deadfry42
 > the code below licensed under GPLv3.
 ]]
@@ -164,7 +164,7 @@ uis.InputChanged:Connect(function(i : InputObject, gpe : boolean)
 
         if Xpos == 0 and Ypos == 0 then return end
 
-        local actualValue = math.deg(math.atan2(Ypos, Xpos))
+        local actualValue = math.deg(math.atan2(Ypos, Xpos)) + 90
 
         if showDebug then
             xframe.Size = UDim2.new(0, Xpos, 0, 5)
